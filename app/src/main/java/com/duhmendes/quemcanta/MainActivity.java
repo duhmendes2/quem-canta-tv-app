@@ -73,7 +73,7 @@ public class MainActivity extends Activity {
             @Override
             public void onPermissionRequest(final PermissionRequest request) {
                 // Grant media / microphone permissions if requested by WebRTC
-                runOnUiThread(request::grant);
+                runOnUiThread(() -> request.grant(request.getResources()));
             }
         });
 
