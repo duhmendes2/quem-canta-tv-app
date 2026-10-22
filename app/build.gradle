@@ -1,0 +1,45 @@
+plugins {
+    id 'com.android.application'
+}
+
+android {
+    namespace 'com.duhmendes.quemcanta'
+    compileSdk 34
+
+    defaultConfig {
+        applicationId 'com.duhmendes.quemcanta'
+        minSdk 21
+        targetSdk 34
+        versionCode 1
+        versionName '1.0.0'
+    }
+
+    signingConfigs {
+        release {
+            if (file('upload-keystore.jks').exists()) {
+                storeFile file('upload-keystore.jks')
+                storePassword 'projectorpass'
+                keyAlias 'upload'
+                keyPassword 'projectorpass'
+            } else {
+                signingConfig signingConfigs.debug
+            }
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            signingConfig signingConfigs.release
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+}
+
+dependencies {
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+}
